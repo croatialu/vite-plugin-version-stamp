@@ -6,6 +6,32 @@
 [![JSDocs][jsdocs-src]][jsdocs-href]
 [![License][license-src]][license-href]
 
+## Install
+
+```bash
+pnpm add vite-plugin-version-stamp -D
+```
+
+## Usage
+
+```ts
+import versionStamp from 'vite-plugin-version-stamp'
+
+export default defineConfig({
+  plugins: [versionStamp()],
+})
+```
+
+## API
+
+- `globalName`: The global name of the project.
+- `filename`: The output filename.
+- `rewrite`: The rewrite function to transform the version stamp.
+  - `options.name`: The name of the project, from package.json.
+  - `options.version`: The version of the project, from package.json.
+  - `options.shortHash`: The short git hash of the project.
+  - `options.fullHash`: The full git hash of the project.
+
 ## License
 
 [MIT](./LICENSE) License © 2024-PRESENT [Croatia Lu](https://github.com/croatialu)
