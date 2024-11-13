@@ -125,8 +125,15 @@ export default (options: Options = {}): Plugin => {
       outputDir = config.build.outDir
     },
     async closeBundle() {
-      if (!outputDir || filename === false)
+      if (filename === false) {
+        console.warn('vite-plugin-version-stamp: filename is false, skip writing file')
         return
+      }
+
+      if (!outputDir || !existsSync(outputDir)) {
+        console.warn('vite-plugin-version-stamp: outputDir is not found, skip writing file')
+        return
+      }
 
       const targetFilepath = resolve(outputDir, filename)
       const versionResult = await getVersionsResult()
