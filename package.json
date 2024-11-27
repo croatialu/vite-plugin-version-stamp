@@ -8,6 +8,11 @@
   "license": "MIT",
   "funding": "https://github.com/sponsors/croatialu",
   "homepage": "https://github.com/croatialu/vite-plugin-version-stamp#readme",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public",
+    "tag": "latest"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/croatialu/vite-plugin-version-stamp.git"
