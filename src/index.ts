@@ -1,8 +1,8 @@
-import type { IndexHtmlTransformResult, Plugin } from 'vite'
 import childProcess from 'node:child_process'
 import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import process from 'node:process'
+import { type IndexHtmlTransformResult, normalizePath, type Plugin } from 'vite'
 
 interface RewriteOptions {
   name: string
@@ -17,7 +17,7 @@ function execCommand(command: string): Promise<string> {
   return new Promise((resolve, reject) => {
     exec(command, (error, stdout) => {
       if (error) {
-        reject(error)
+        reject(new Error(`Failed to execute command: ${command}`))
       }
       else {
         const output = stdout.toString()?.replace('\n', '')
@@ -84,6 +84,19 @@ export default (options: Options = {}): Plugin => {
   const { globalName = '__VERSION__', version, filename = 'version.json' } = options
   let outputDir: string | undefined
   let result: unknown
+  let rootDir: string | undefined
+  let isGitRepo = true
+
+  const checkIsGitRepo = (dir: string): boolean => {
+    let currentDir = dir
+    while (currentDir) {
+      if (existsSync(resolve(currentDir, '.git'))) {
+        return true
+      }
+      currentDir = resolve(currentDir, '..')
+    }
+    return false
+  }
 
   const getVersionsResult = async (): Promise<unknown> => {
     if (result)
@@ -98,6 +111,7 @@ export default (options: Options = {}): Plugin => {
 
   return {
     name: 'vite-plugin-version-stamp',
+    enforce: 'post',
     async config() {
       const versionResult = await getVersionsResult()
 
@@ -123,8 +137,16 @@ export default (options: Options = {}): Plugin => {
     },
     configResolved(config) {
       outputDir = config.build.outDir
+      rootDir = normalizePath(config.root)
+
+      isGitRepo = checkIsGitRepo(rootDir)
     },
     async closeBundle() {
+      if (!isGitRepo) {
+        console.warn('vite-plugin-version-stamp: not a git repository, skip writing file')
+        return
+      }
+
       if (filename === false) {
         console.warn('vite-plugin-version-stamp: filename is false, skip writing file')
         return
