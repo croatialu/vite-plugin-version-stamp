@@ -2,7 +2,7 @@ import childProcess from 'node:child_process'
 import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import process from 'node:process'
-import { type IndexHtmlTransformResult, normalizePath, type Plugin } from 'vite'
+import { type IndexHtmlTransformResult, normalizePath, type PluginOption } from 'vite'
 
 interface RewriteOptions {
   name: string
@@ -80,7 +80,7 @@ interface Options {
   filename?: string | false
 }
 
-export default (options: Options = {}): Plugin => {
+export default (options: Options = {}): PluginOption => {
   const { globalName = '__VERSION__', version, filename = 'version.json' } = options
   let outputDir: string | undefined
   let result: unknown
