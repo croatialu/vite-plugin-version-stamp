@@ -9,6 +9,7 @@ interface RewriteOptions {
   version: string
   shortHash: string
   fullHash: string
+  date: string
 }
 
 function execCommand(command: string): Promise<string> {
@@ -41,23 +42,27 @@ function readPackageInfo(): { name: string, version: string } {
 
 async function getRewriteOptions(): Promise<RewriteOptions> {
   const { name, version } = readPackageInfo()
-  const { shortHash, fullHash } = await readGitInfo()
+  const { shortHash, fullHash, date } = await readGitInfo()
 
   return {
     name,
     version,
     shortHash,
     fullHash,
+    date,
   }
 }
 
-async function readGitInfo(): Promise<{ shortHash: string, fullHash: string }> {
+async function readGitInfo(): Promise<{ shortHash: string, fullHash: string, date: string }> {
   const shortHash = await execCommand('git rev-parse --short HEAD')
   const fullHash = await execCommand('git rev-parse HEAD')
+  const dateString = await execCommand('git show -s --format=%ci HEAD')
+  const date = new Date(dateString)
 
   return {
     shortHash,
     fullHash,
+    date: date.toISOString(),
   }
 }
 
