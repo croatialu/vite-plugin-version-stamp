@@ -1,8 +1,9 @@
+import type { IndexHtmlTransformResult, PluginOption } from 'vite'
 import childProcess from 'node:child_process'
 import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import process from 'node:process'
-import { type IndexHtmlTransformResult, normalizePath, type PluginOption } from 'vite'
+import { normalizePath } from 'vite'
 
 interface RewriteOptions {
   name: string

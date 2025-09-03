@@ -48,7 +48,7 @@
     "vite": "*"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^4.19.0",
+    "@antfu/eslint-config": "^5.2.1",
     "@antfu/ni": "^25.0.0",
     "@antfu/utils": "^9.2.0",
     "@types/node": "^24.3.0",
@@ -60,7 +60,7 @@
     "simple-git-hooks": "^2.13.1",
     "typescript": "^5.9.2",
     "unbuild": "^3.6.1",
-    "vite": "^6.3.5",
+    "vite": "^7.1.4",
     "vitest": "^3.2.4"
   },
   "simple-git-hooks": {
