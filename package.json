@@ -2,7 +2,7 @@
   "name": "vite-plugin-version-stamp",
   "type": "module",
   "version": "1.0.4",
-  "packageManager": "pnpm@10.15.1",
+  "packageManager": "pnpm@10.28.0",
   "description": "_description_",
   "author": "Croatia Lu <wuli.croatia@gmail.com>",
   "license": "MIT",
@@ -48,20 +48,20 @@
     "vite": "*"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^5.2.1",
-    "@antfu/ni": "^25.0.0",
-    "@antfu/utils": "^9.2.0",
-    "@types/node": "^24.3.0",
-    "bumpp": "^10.2.3",
-    "eslint": "^9.34.0",
+    "@antfu/eslint-config": "^7.0.1",
+    "@antfu/ni": "^28.2.0",
+    "@antfu/utils": "^9.3.0",
+    "@types/node": "^25.0.9",
+    "bumpp": "^10.4.0",
+    "eslint": "^9.39.2",
     "esno": "^4.8.0",
-    "lint-staged": "^16.1.6",
+    "lint-staged": "^16.2.7",
     "pnpm": "^10.15.1",
     "simple-git-hooks": "^2.13.1",
-    "typescript": "^5.9.2",
+    "typescript": "^5.9.3",
     "unbuild": "^3.6.1",
-    "vite": "^7.1.4",
-    "vitest": "^3.2.4"
+    "vite": "^7.3.1",
+    "vitest": "^4.0.17"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"
